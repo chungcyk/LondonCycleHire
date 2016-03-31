@@ -1,0 +1,43 @@
+.header{
+	background:#eee;
+	color:#fff;
+	margin:0px 0px 20px 0px;
+	padding-left: auto;
+	height:6vw;
+	border-top: 0.5vw solid #e73029;
+}
+
+
+.header .container h1 {
+	padding: 0.5vw;
+	background: #e73029;
+	display: inline-block;
+	font-size: 3.5vw;
+	margin: 0;
+
+}
+
+body{
+	font-size: 2vw;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  vertical-align: middle;
+  padding: 2vw 0px 2vw 0px;
+}
+
+.progress {
+	vertical-align: middle;
+	margin:0;
+	height: 2vw;
+}
+
+.progress-bar{
+	font-size: 1.5vw;
+	line-height: 2vw;
+}

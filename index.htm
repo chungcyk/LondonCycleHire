@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+<script>
+    function getQueryVariable(variable)
+  {
+        var query = window.location.search.substring(1);
+        var vars = query.split("=");
+         
+        var templist = {};
+        var pair = vars[1].split("+");
+        return pair;
+  }
+</script>
+
+
+<html>
+
+<body>
+<div class="header">
+    <div class="container">
+    <h1>London Cycle Hire Availability Checker</h1>
+    </div>
+  </div>
+
+<div class="container">
+  <table class="table" id="demo"></table>
+
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        myFunction(xmlhttp);
+      }
+    };
+    // xmlhttp.open("GET", "https://tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml", true);
+    xmlhttp.open("GET", "livecyclehireupdates.xml", true);
+    xmlhttp.send();
+
+  function myFunction(xml) {
+    var i;
+    var xmlDoc = xml.responseXML;
+    var RequiredID = getQueryVariable("id");
+
+    var table="<tr><th>Cycle Dock Location</th><th>Last Updated: "+ xmlDoc.getElementsByTagName("stations")[0].childNodes[0].nodeValue; +" </th></tr>";
+    
+    var x = xmlDoc.getElementsByTagName("station");
+    for (i = 0; i <RequiredID.length; i++) { 
+    // for (i in RequiredID) { 
+      var local_id = RequiredID[i] -1 ;
+      var fullpc= x[local_id].getElementsByTagName("nbBikes")[0].childNodes[0].nodeValue/x[local_id].getElementsByTagName("nbDocks")[0].childNodes[0].nodeValue*100;
+      var emptypc= x[local_id].getElementsByTagName("nbEmptyDocks")[0].childNodes[0].nodeValue/x[local_id].getElementsByTagName("nbDocks")[0].childNodes[0].nodeValue*100;
+
+      table += "<tr><td>" +
+      x[local_id].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+      // "</td><td>" +
+      // x[i].getElementsByTagName("nbBikes")[0].childNodes[0].nodeValue +
+      // "</td><td>" +
+      // x[i].getElementsByTagName("nbEmptyDocks")[0].childNodes[0].nodeValue +
+      // "</td><td>" +
+      // x[i].getElementsByTagName("nbDocks")[0].childNodes[0].nodeValue +
+      '</td><td> <div class="progress"> <div class="progress-bar progress-bar-success" style="width:'+
+         fullpc+
+         '%">' +
+          x[local_id].getElementsByTagName("nbBikes")[0].childNodes[0].nodeValue +
+        '</div><div class="progress-bar progress-bar-danger" style="width:'+
+         emptypc+
+         '%">'+
+          x[local_id].getElementsByTagName("nbEmptyDocks")[0].childNodes[0].nodeValue +
+        '</div></div></td></tr>';
+    }
+    document.getElementById("demo").innerHTML = table;
+
+
+  }
+  </script>
+
+</div>
+
+</body>
+</html>
