@@ -26,7 +26,7 @@
     </div>
   </div>
 
-<div class="container">
+<div class="container table-responsive">
   <table class="table" id="demo"></table>
 
   <script>
@@ -44,8 +44,9 @@
     var i;
     var xmlDoc = xml.responseXML;
     var RequiredID = getQueryVariable("id");
+    var time = xmlDoc.getElementsByTagName("stations")[0].childNodes[0].nodeValue;
 
-    var table="<tr><th>Cycle Dock Location</th><th>Last Updated: "+ xmlDoc.getElementsByTagName("stations")[0].childNodes[0].nodeValue; +" </th></tr>";
+    var table="<tr><th>Cycle Dock Location</th><th>Last Updated: "+ time +"</th></tr>";
     
     var x = xmlDoc.getElementsByTagName("station");
     for (i = 0; i <RequiredID.length; i++) { 
@@ -79,6 +80,11 @@
   </script>
 
 </div>
+
+<div class="container">
+Santander Cycles data supplied at (time) on (date) by Transport for London  
+</div>
+
 
 </body>
 </html>
