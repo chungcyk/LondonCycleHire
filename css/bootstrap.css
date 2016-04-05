@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=1313c5acf65f3a8ec9c90c08b1f40183)
- * Config saved to config.json and https://gist.github.com/1313c5acf65f3a8ec9c90c08b1f40183
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=6ade07c5cbc76ce925c29f245bf36c6f)
+ * Config saved to config.json and https://gist.github.com/6ade07c5cbc76ce925c29f245bf36c6f
  */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -196,6 +196,78 @@ table {
 td,
 th {
   padding: 0;
+}
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+@media print {
+  *,
+  *:before,
+  *:after {
+    background: transparent !important;
+    color: #000 !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+  .navbar {
+    display: none;
+  }
+  .btn > .caret,
+  .dropup > .btn > .caret {
+    border-top-color: #000 !important;
+  }
+  .label {
+    border: 1px solid #000;
+  }
+  .table {
+    border-collapse: collapse !important;
+  }
+  .table td,
+  .table th {
+    background-color: #fff !important;
+  }
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #ddd !important;
+  }
 }
 * {
   -webkit-box-sizing: border-box;
@@ -1347,7 +1419,7 @@ th {
 .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.42857143;
-  vertical-align: middle;
+  vertical-align: top;
   border-top: 1px solid #dddddd;
 }
 .table > thead > tr > th {

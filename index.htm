@@ -3,6 +3,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/moment.min.js"></script>
 
 <script>
     function getQueryVariable(variable)
@@ -14,6 +15,16 @@
         var pair = vars[1].split("+");
         return pair;
   }
+
+  // function seconds2HHMMSS(d) {
+
+  //     d = Number(d);
+  //     var h = Math.floor(d / 3600);
+  //     var m = Math.floor(d % 3600 / 60);
+  //     var s = Math.floor(d % 3600 % 60);
+  //     return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s); }
+
+ 
 </script>
 
 
@@ -25,9 +36,6 @@
     <h1>London Cycle Hire Availability Checker</h1>
     </div>
   </div>
-
-<div class="container table-responsive">
-  <table class="table" id="demo"></table>
 
   <script>
     var xmlhttp = new XMLHttpRequest();
@@ -44,9 +52,9 @@
     var i;
     var xmlDoc = xml.responseXML;
     var RequiredID = getQueryVariable("id");
-    var time = xmlDoc.getElementsByTagName("stations")[0].childNodes[0].nodeValue;
+    var time = xmlDoc.getElementsByTagName("stations")[0].getAttribute("lastUpdate");
 
-    var table="<tr><th>Cycle Dock Location</th><th>Last Updated: "+ time +"</th></tr>";
+    var table="<tr><th>Cycle Dock Location</th><th></th></tr>";
     
     var x = xmlDoc.getElementsByTagName("station");
     for (i = 0; i <RequiredID.length; i++) { 
@@ -55,14 +63,8 @@
       var fullpc= x[local_id].getElementsByTagName("nbBikes")[0].childNodes[0].nodeValue/x[local_id].getElementsByTagName("nbDocks")[0].childNodes[0].nodeValue*100;
       var emptypc= x[local_id].getElementsByTagName("nbEmptyDocks")[0].childNodes[0].nodeValue/x[local_id].getElementsByTagName("nbDocks")[0].childNodes[0].nodeValue*100;
 
-      table += "<tr><td>" +
+      table += '<tr><td class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> <img src="img/cycle-hire-pushpin-icon.gif">  '+
       x[local_id].getElementsByTagName("name")[0].childNodes[0].nodeValue +
-      // "</td><td>" +
-      // x[i].getElementsByTagName("nbBikes")[0].childNodes[0].nodeValue +
-      // "</td><td>" +
-      // x[i].getElementsByTagName("nbEmptyDocks")[0].childNodes[0].nodeValue +
-      // "</td><td>" +
-      // x[i].getElementsByTagName("nbDocks")[0].childNodes[0].nodeValue +
       '</td><td> <div class="progress"> <div class="progress-bar progress-bar-success" style="width:'+
          fullpc+
          '%">' +
@@ -73,17 +75,23 @@
           x[local_id].getElementsByTagName("nbEmptyDocks")[0].childNodes[0].nodeValue +
         '</div></div></td></tr>';
     }
-    document.getElementById("demo").innerHTML = table;
 
+    document.getElementById("cycletable").innerHTML = table;
 
+    var timedisp=' Last Updated: '+moment(time,"x").format("D MMM YYYY HH:mm");
+    document.getElementById("timestamp").innerHTML = timedisp;
   }
   </script>
 
-</div>
 
 <div class="container">
-Santander Cycles data supplied at (time) on (date) by Transport for London  
-</div>
+
+    <table class="table table-hover" id="cycletable"></table>
+
+  <div class="footer">
+    Santander Cycles data supplied by Transport for London.
+    <p id="timestamp"></p>
+  </div>
 
 
 </body>
